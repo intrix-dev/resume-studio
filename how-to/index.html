@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#27384e">
+  <title>Resume Studio — How-to guide</title>
+  <style>
+    :root {
+      --ink: #282522;
+      --muted: #6f6a65;
+      --paper: #fffdfb;
+      --warm: #f8eee9;
+      --line: #e7ddd7;
+      --coral: #df8465;
+      --coral-dark: #b75f43;
+      --navy: #27384e;
+      --blue: #dce8f3;
+      --sage: #e8efe9;
+      --white: #fff;
+      --shadow: 0 22px 70px rgba(46, 38, 34, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px clamp(20px, 5vw, 72px);
+      background: rgba(39, 56, 78, .96);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+    .topbar strong {
+      font-size: 14px;
+      letter-spacing: .04em;
+    }
+    .studio-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 15px;
+      border-radius: 7px;
+      background: var(--coral);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .studio-link:hover { background: #ec906f; }
+    .studio-link:focus-visible,
+    .jump a:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(64px, 9vw, 118px) clamp(22px, 7vw, 104px) 78px;
+      background:
+        radial-gradient(circle at 83% 10%, rgba(223, 132, 101, .22), transparent 28%),
+        linear-gradient(145deg, #fffaf7 0%, #fffdfb 55%, #f4eee9 100%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -130px;
+      width: 430px;
+      height: 430px;
+      border: 60px solid rgba(39, 56, 78, .06);
+      border-radius: 50%;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--coral-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(43px, 7vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+    }
+    .hero-copy {
+      max-width: 690px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(19px, 2.4vw, 25px);
+      line-height: 1.48;
+    }
+    .hero-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 34px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .78);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .hero-note::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .jump-wrap {
+      padding: 0 clamp(20px, 5vw, 72px);
+      background: var(--navy);
+    }
+    .jump {
+      display: flex;
+      gap: 9px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 0;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    .jump a {
+      flex: none;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 999px;
+      color: #eef3f7;
+      font-size: 13px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .jump a:hover { border-color: var(--coral); color: var(--white); }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 74px clamp(22px, 5vw, 48px) 108px;
+    }
+    section {
+      scroll-margin-top: 90px;
+      padding: 74px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    section:first-child { padding-top: 10px; }
+    section:last-child { border-bottom: 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 78px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 38px;
+    }
+    .section-num {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--coral);
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(31px, 4.2vw, 47px);
+      line-height: 1.12;
+      letter-spacing: -.03em;
+    }
+    .section-intro {
+      max-width: 740px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    h3 { margin: 0; font-size: 22px; line-height: 1.25; }
+    p { margin: 8px 0 0; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+      counter-reset: flow;
+    }
+    .flow article {
+      position: relative;
+      padding-top: 64px;
+    }
+    .flow article::before {
+      counter-increment: flow;
+      content: counter(flow);
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 800;
+    }
+    .flow article:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 8px;
+      right: 0;
+      color: var(--coral);
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .flow p, .steps p, .feature p { color: var(--muted); }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .feature {
+      min-height: 100%;
+      padding: 30px;
+      border-radius: 18px;
+      background: var(--warm);
+    }
+    .feature.blue { background: var(--blue); }
+    .feature.sage { background: var(--sage); }
+    .feature.dark { background: var(--navy); color: var(--white); }
+    .feature.dark p { color: #dbe4ed; }
+    .feature ul {
+      margin: 20px 0 0;
+      padding-left: 19px;
+    }
+    .feature li { margin: 9px 0; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .steps article {
+      padding: 26px 0 0;
+      border-top: 3px solid var(--coral);
+    }
+    .steps .label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--coral-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .prompt {
+      margin: 34px 0 0;
+      padding: 26px 28px;
+      border-left: 5px solid var(--coral);
+      border-radius: 0 14px 14px 0;
+      background: var(--blue);
+      color: #36546f;
+      font-size: clamp(19px, 2.8vw, 25px);
+      font-weight: 750;
+    }
+    .prompt small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--coral-dark);
+      font-size: 12px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .control-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px 34px;
+      margin: 30px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .control-list li {
+      position: relative;
+      padding-left: 30px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .control-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: -1px;
+      color: var(--coral);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .save-rule {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border-radius: 22px;
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .save-rule article {
+      padding: 8px 4px;
+    }
+    .save-rule .or {
+      display: grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 50%;
+      color: #cbd6e0;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .save-rule strong {
+      display: block;
+      color: var(--coral);
+      font-size: 14px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .save-rule h3 { margin-top: 9px; }
+    .save-rule p { color: #dbe4ed; }
+
+    .truth {
+      margin-top: 28px;
+      padding: 22px 24px;
+      border-radius: 14px;
+      background: var(--sage);
+      color: #365743;
+      font-weight: 700;
+    }
+
+    .final {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
+      margin-top: 70px;
+      padding: clamp(30px, 5vw, 52px);
+      border-radius: 24px;
+      background: var(--warm);
+    }
+    .final h2 { font-size: clamp(30px, 4vw, 44px); }
+    .final p { max-width: 660px; color: var(--muted); font-size: 18px; }
+    .final .studio-link { min-height: 50px; padding: 12px 20px; }
+
+    footer {
+      padding: 30px 22px 44px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 820px) {
+      .flow, .steps { grid-template-columns: 1fr 1fr; }
+      .flow article:nth-child(2)::after { display: none; }
+      .split { grid-template-columns: 1fr; }
+      .save-rule {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .save-rule .or { width: 40px; height: 40px; }
+      .final { grid-template-columns: 1fr; }
+      .final .studio-link { justify-self: start; }
+    }
+    @media (max-width: 560px) {
+      .topbar { padding: 11px 16px; }
+      .topbar strong { font-size: 12px; }
+      .studio-link { min-height: 38px; padding: 7px 11px; font-size: 13px; }
+      .hero { padding-top: 58px; }
+      .hero-note { align-items: flex-start; border-radius: 14px; }
+      main { padding-top: 54px; }
+      section { padding: 58px 0; }
+      .section-head {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 14px;
+      }
+      .section-num { width: 42px; height: 42px; font-size: 17px; }
+      .flow, .steps, .control-list { grid-template-columns: 1fr; }
+      .flow article:not(:last-child)::after { display: none; }
+      .feature { padding: 24px; }
+      .prompt { padding: 22px; }
+      .save-rule { padding: 26px; }
+      .final { margin-top: 46px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <strong>Resume Studio · How-to guide</strong>
+    <a class="studio-link" href="../">Open Resume Studio</a>
+  </header>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Your permanent guide</p>
+      <h1>Know exactly what to do—and what gets saved.</h1>
+      <p class="hero-copy">Use this page whenever you want to tailor a resume, change the design, edit your permanent copy, reopen saved work, or ask the assistant for help.</p>
+      <div class="hero-note">The Studio previews changes before you keep them.</div>
+    </div>
+  </div>
+
+  <nav class="jump-wrap" aria-label="Guide sections">
+    <div class="jump">
+      <a href="#start">Quick start</a>
+      <a href="#assistant">Ask the assistant</a>
+      <a href="#attachments">Attach files</a>
+      <a href="#tailor">Tailor</a>
+      <a href="#format">Format</a>
+      <a href="#save">Keep vs. Save</a>
+      <a href="#versions">Resume versions</a>
+      <a href="#applications">Saved work</a>
+      <a href="#export">PDF</a>
+      <a href="#report">Report a problem</a>
+      <a href="#support-preview">Support previews</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="start">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div>
+          <h2>The whole workflow is four decisions</h2>
+          <p class="section-intro">You can experiment freely. Nothing becomes permanent until you approve or save it.</p>
+        </div>
+      </div>
+      <div class="flow">
+        <article><h3>Choose</h3><p>Ask a question, add a job posting, edit text, or change the design.</p></article>
+        <article><h3>Preview</h3><p>Watch the resume update on screen before committing to it.</p></article>
+        <article><h3>Approve</h3><p>Choose Keep for chat formatting, or Save for permanent resume edits.</p></article>
+        <article><h3>Use it</h3><p>Save a named version across devices, reopen saved work, or download the PDF you see.</p></article>
+      </div>
+    </section>
+
+    <section id="assistant">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div>
+          <h2>The assistant can advise you—or act when you ask</h2>
+          <p class="section-intro">A question stays conversational. A clear instruction creates a preview of the requested change.</p>
+        </div>
+      </div>
+      <div class="split">
+        <article class="feature blue">
+          <h3>Ask for advice</h3>
+          <p>Ask whether a job is worth applying for, what to emphasize, how to explain a gap, or what to expect in an interview.</p>
+        </article>
+        <article class="feature">
+          <h3>Ask it to do something</h3>
+          <p>Tell it to tailor the resume, change the design or font, adjust spacing, manage the scan code, or restore template formatting.</p>
+        </article>
+      </div>
+      <div class="prompt"><small>Example</small>“Use a navy Sidebar, tighten the spacing, and make the scan code open my LinkedIn profile.”</div>
+      <div class="truth"><strong>Chat is its own floating window.</strong> Choose the round Chat launcher to open it. Drag the header to move it, drag the lower-right corner to resize it, use — to collapse it, and choose the launcher again to return to the same conversation. Its position, size, open state, and bounded chat history survive a refresh in this browser. On a phone, chat automatically uses the safe full-width layout.</div>
+      <div class="truth">If a reply arrives while chat is collapsed, the red badge on the launcher shows how many messages are waiting. Opening chat clears the badge after the messages are visible.</div>
+      <div class="truth">The assistant will not invent experience, silently change owner-controlled settings, or claim a change was saved when it was not.</div>
+      <div class="split" style="margin-top:34px">
+        <article class="feature sage">
+          <h3>What “approval needed” means</h3>
+          <p>Application tailoring may reword and emphasize facts already approved in <strong>My resume</strong>. It may not add a new title, employer, date, credential, competency, accomplishment, or Highlight from a job posting or attached file. This does not mean you do not have that experience; it means Resume Studio does not yet have your approval to present it as a fact.</p>
+        </article>
+        <article class="feature">
+          <h3>How to approve a new fact</h3>
+          <p>Open <strong>Edit my resume</strong>, add or support the fact, choose <strong>Save to my resume</strong>, then retry your chat request. Studio names each item it left out. If Studio itself changes a protected detail or page-placement flag, it restores the approved value automatically and still applies the supported parts.</p>
+        </article>
+      </div>
+      <div class="truth"><strong>If an update cannot be repaired safely:</strong> Studio leaves the resume unchanged and asks you to retry. The explanation describes the customer action to take; it does not show internal paths such as experience array numbers.</div>
+      <div id="attachments" class="split" style="margin-top:34px">
+        <article class="feature sage">
+          <h3>Attach files or a whole folder</h3>
+          <p>Open Attach files or a folder above the message box. Choose up to 20 PDFs (including scanned PDFs), Word, Excel, PowerPoint, text or code files, photos, or screenshots—or choose a folder and let chat review its readable files together. You can also drag files or a folder into the attachment area.</p>
+        </article>
+        <article class="feature">
+          <h3>Private, bounded, and removable</h3>
+          <p>Each file can be up to 10 MB and each batch up to 30 MB. Folder names are kept so chat understands the context. Originals are read, never executed; attachments are private to Resume Studio and are removed after seven days or immediately when you choose Remove.</p>
+        </article>
+      </div>
+      <div class="prompt"><small>Example</small>“Review everything in this application folder together. Tell me what is missing, what conflicts, and what decision you need from me.”</div>
+    </section>
+
+    <section id="tailor">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div>
+          <h2>Turn a job posting into a focused application</h2>
+          <p class="section-intro">Pasting the full description is the most reliable way to give the assistant everything it needs.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <article><span class="label">Step 1</span><h3>Open Add a job posting</h3><p>Paste the link or the full job description.</p></article>
+        <article><span class="label">Step 2</span><h3>Add your preference</h3><p>For example: “keep it to one page” or “also write a cover letter.”</p></article>
+        <article><span class="label">Step 3</span><h3>Choose Tailor my resume</h3><p>Review the result on screen, then save or export when it is ready.</p></article>
+      </div>
+    </section>
+
+    <section id="format">
+      <div class="section-head">
+        <div class="section-num">4</div>
+        <div>
+          <h2>Format it yourself—or let chat do the same work</h2>
+          <p class="section-intro">The Design &amp; spacing panel and the assistant use the same supported settings.</p>
+        </div>
+      </div>
+      <div class="split">
+        <article class="feature">
+          <h3>Use the visible controls</h3>
+          <ul>
+            <li>Open Design &amp; spacing.</li>
+            <li>Choose a template, colour, font, and background.</li>
+            <li>Fine-tune section, divider, and Core Competencies spacing.</li>
+            <li>Set the scan-code destination, then confirm it with Open current link.</li>
+            <li>Set scan-code visibility and size by page.</li>
+          </ul>
+        </article>
+        <article class="feature dark">
+          <h3>Ask chat to format it</h3>
+          <p>Describe the result you want in ordinary language. The Studio changes the preview and shows Keep these changes and Undo this.</p>
+        </article>
+      </div>
+      <ul class="control-list">
+        <li>12 resume templates</li>
+        <li>Four print-safe font choices</li>
+        <li>Preset or custom colour</li>
+        <li>Background and page length</li>
+        <li>Section and divider spacing</li>
+        <li>Bounded content placement</li>
+        <li>Editable scan-code destination plus page-specific controls</li>
+      </ul>
+    </section>
+
+    <section id="save">
+      <div class="section-head">
+        <div class="section-num">5</div>
+        <div>
+          <h2>“Keep” and “Save” do two different jobs</h2>
+          <p class="section-intro">This is the most important distinction in the Studio.</p>
+        </div>
+      </div>
+      <div class="save-rule">
+        <article>
+          <strong>After chat formatting</strong>
+          <h3>Choose Keep these changes</h3>
+          <p>The pinned approval bar stays above the message box. Keep preserves the preview through reloads and uses it for the PDF.</p>
+        </article>
+        <div class="or">OR</div>
+        <article>
+          <strong>After permanent resume edits</strong>
+          <h3>Choose Save to my resume</h3>
+          <p>This commits the reviewed text and formatting changes to your permanent master resume.</p>
+        </article>
+      </div>
+      <div class="truth">Text edits autosave as a browser draft while you type. While editing, use the <strong>+ Add</strong> control beside Professional Summary, Core Competencies, Selected Accomplishments, or a job to create a new item directly where it belongs on the resume, then type into the new row. Clicking elsewhere or choosing Done editing keeps the new wording in the preview and its saved draft; every title, name, and contact-detail change is kept too. To remove a Highlight, erase all of its text on the page or use the × button in the list below; the item stays removed through save, reopen, and PDF. “Saved to your resume” means the permanent version is committed. If pasted text brings foreign formatting, choose Restore template formatting; use Core Competencies spacing for intentional gaps between competency items.</div>
+    </section>
+
+    <section id="versions">
+      <div class="section-head">
+        <div class="section-num">6</div>
+        <div>
+          <h2>Named resume versions open across your devices</h2>
+          <p class="section-intro">Your permanent master stays separate. Choose which named working version should open everywhere.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <article><span class="label">Name it</span><h3>Open Your resume versions</h3><p>Enter a clear name such as General, Real Estate, or a company and role. When protecting a browser source, use a new distinctive name and choose Save as a new version so no prior version is overwritten.</p></article>
+        <article><span class="label">Share it</span><h3>Choose Save across devices</h3><p>The exact wording, design, job context, photo, photo crop, and rendering choices on this screen become one named version. If the visible browser copy contains deliberate owner edits that differ from the current shared record—including direct edits to a tailored version or an untailored MASTER—review the visible resume and complete the separate confirmation step; nothing is stored before that second confirmation.</p></article>
+        <article><span class="label">Choose it</span><h3>Use everywhere</h3><p>The version marked Active everywhere opens automatically after you enter your passcode on any authorized device. If that browser still has an older draft with no shared-version record, Studio opens the active version first and keeps the older draft on that device for recovery.</p></article>
+      </div>
+      <div class="split" style="margin-top:34px">
+        <article class="feature sage">
+          <h3>Every save is recoverable</h3>
+          <p>Each save creates a new revision. Open History to compare, open, or restore an earlier revision without deleting the current one. The latest 25 revisions remain available; older revisions are removed automatically after that limit.</p>
+        </article>
+        <article class="feature">
+          <h3>You stay in control of conflicts</h3>
+          <p>If a named browser version and the shared version differ, Studio shows both timestamps and asks which one should open everywhere. Whichever one you do not choose is preserved as a separate named version first. An older browser-only draft is instead kept on that device with a Review older browser draft control while the active shared version opens.</p>
+        </article>
+      </div>
+      <div class="truth">You can rename, duplicate, open, review history, and activate saved versions. A custom photo and its zoom/position travel together inside the authenticated version and are restored for PDF export; the photo is not placed on a public URL. If “Review changes before updating MASTER” appears, check “Changes in this save,” then choose “Update MASTER” only when those are the changes you want. That list compares this browser copy with the current saved MASTER version, so earlier differences from the permanent resume source are not presented as part of the new save. If Studio stops a save, your edits remain visible, and choosing another version opens the same review step so you can confirm or cancel before anything switches. Temporary connection failures still retry. Updating a named version does not change or delete the permanent resume source.</div>
+    </section>
+
+    <section id="applications">
+      <div class="section-head">
+        <div class="section-num">7</div>
+        <div>
+          <h2>Your saved applications keep their editable state</h2>
+          <p class="section-intro">Sign out, return later, and reopen the exact resume version you saved.</p>
+        </div>
+      </div>
+      <div class="split">
+        <article class="feature sage">
+          <h3>What is preserved</h3>
+          <ul>
+            <li>Template, colour, font, spacing, dividers, and scan-code choices</li>
+            <li>The tailored text and approved edits</li>
+            <li>The editable data used for PDF export</li>
+          </ul>
+        </article>
+        <article class="feature">
+          <h3>Where to find it</h3>
+          <p>Open Resume tools, then Your applications. Select an editable version to reopen it.</p>
+          <p>Older PDF-only files are labeled Unavailable instead of opening a broken editor.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="export">
+      <div class="section-head">
+        <div class="section-num">8</div>
+        <div>
+          <h2>The PDF matches the approved preview</h2>
+          <p class="section-intro">Download only after the page looks the way you want it to look.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <article><span class="label">Confirm</span><h3>Check the page</h3><p>Review the template, colour, spacing, length, and scan-code placement.</p></article>
+        <article><span class="label">Preserve</span><h3>Keep or Save</h3><p>Keep chat formatting or save permanent edits before downloading.</p></article>
+        <article><span class="label">Download</span><h3>Choose Download PDF</h3><p>The Studio first captures any text still being typed, then archives the exact editable version used for the export.</p></article>
+      </div>
+    </section>
+
+    <section id="report">
+      <div class="section-head">
+        <div class="section-num">9</div>
+        <div>
+          <h2>Report a problem or request a feature inside chat</h2>
+          <p class="section-intro">The Studio creates a real ticket, alerts support, and shows its number only after both succeed. Support then owns it through a verified outcome.</p>
+        </div>
+      </div>
+      <div class="prompt"><small>Example</small>“Please report that pasted text changed the font, and show me the ticket number.”</div>
+      <div class="split" style="margin-top:28px">
+        <article class="feature sage">
+          <h3>A real ticket is created</h3>
+          <p>You will see the ticket number and a clickable link in the conversation.</p>
+        </article>
+        <article class="feature">
+          <h3>Support owns the ticket</h3>
+          <p>Support is alerted immediately and sends one received/working acknowledgement. After that, this chat shows only a necessary question or a verified completion/private-preview note. A five-minute safety check catches a missed alert without creating duplicates. If either step fails, the Studio says so and does not claim success.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="support-preview">
+      <div class="section-head">
+        <div class="section-num">10</div>
+        <div>
+          <h2>Review a protected support preview and decide whether to keep it</h2>
+          <p class="section-intro">A support preview is a separate copy. It only becomes your saved resume if you choose to keep it.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <article><span class="label">Open</span><h3>Use the link from Studio chat</h3><p>The private link contains only a random review ID. Enter the same Resume Studio passcode to see the copy.</p></article>
+        <article><span class="label">Review</span><h3>Check the page and PDF</h3><p>Confirm the requested placement, photo crop, page flow, and the downloadable preview PDF.</p></article>
+        <article><span class="label">Decide</span><h3>Keep this version, or ask for changes</h3><p>If it is right, press <strong>Keep this version</strong> on the preview and confirm. That saves exactly what you reviewed as a new version in Resume Studio. If it is not right, report the exact changes you want inside Studio chat.</p></article>
+      </div>
+      <div class="truth">Opening or downloading a protected preview changes nothing. Your saved resume changes only when you press Keep this version and confirm, and then it saves exactly the copy you reviewed as a new version with your earlier versions still in history. Keeping works once, and it is refused if your saved resume changed after this review copy was made, so nothing you saved in the meantime can be quietly undone.</div>
+    </section>
+
+    <div class="final">
+      <div>
+        <h2>Ready to work on your resume?</h2>
+        <p>Open the Studio, enter your private passcode, and return to this guide whenever you want a reminder.</p>
+      </div>
+      <a class="studio-link" href="../">Open Resume Studio</a>
+    </div>
+  </main>
+
+  <footer>This page is part of Resume Studio. It is intentionally unlisted and excluded from search engines.</footer>
+</body>
+</html>
